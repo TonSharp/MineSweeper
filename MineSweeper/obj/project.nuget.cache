@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "o4huqnx8JmU2aoelgspt1COO+XAnJ+2poUhwwwnhj4nGRI0ggvcOrT/8fVxKXnXFLWCmzvsOHn/EjFQNQ69Mbw==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\CS\\MineSweeper\\MineSweeper\\MineSweeper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TonSharp\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.11\\microsoft.netcore.app.host.win-x64.3.1.11.nupkg.sha512"
+  ],
+  "logs": []
+}
