@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MineSweeper" 
+        xmlns:vm="clr-namespace:MineSweeper.ViewModels"
         mc:Ignorable="d"
         Title="MainMenu" Height="500" Width="450"
         MinWidth="400" MinHeight="500"
         MaxWidth="500" MaxHeight="500"
         Style="{DynamicResource WindowStyle}">
+    <Window.DataContext>
+        <vm:MainMenuVM/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary Source="Resources/WhiteTheme.xaml"/>
     </Window.Resources>
@@ -23,21 +27,28 @@
         <StackPanel Grid.Row="2" Margin="50,0,50,0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Количество мин"/>
-                <Label Content="{Binding ElementName=MinesCount, Path=Value}"/>
+                <TextBox Text="{Binding Path=MinesCount, Mode=TwoWay}"/>
             </StackPanel>
-            <Slider x:Name="MinesCount" Margin="20,0,20,0" Value="25" SmallChange="1" Minimum="10" Maximum="50" TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
+            <Slider x:Name="MinesCount" Margin="20,0,20,0"
+                    SmallChange="1" Minimum="{Binding Path=MinMinesCount}" Maximum="{Binding Path=MaxMinesCount}" TickPlacement="BottomRight" 
+                    IsSnapToTickEnabled="True" Value="{Binding Path=MinesCount, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Ширина поля"/>
-                <Label Content="{Binding ElementName=XCount, Path=Value}"/>
+                <TextBox Text="{Binding Path=XCount, Mode=TwoWay}"/>
             </StackPanel>
-            <Slider x:Name="XCount" Margin="20,0,20,0" Value="10" SmallChange="1" Minimum="5" Maximum="20" TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
+            <Slider x:Name="XCount" Margin="20,0,20,0"
+                    SmallChange="1" Minimum="{Binding Path=MinCellCount}" Maximum="{Binding Path=MaxCellCount}" TickPlacement="BottomRight" 
+                    IsSnapToTickEnabled="True" Value="{Binding Path=XCount, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Высота поля"/>
-                <Label Content="{Binding ElementName=YCount, Path=Value}"/>
+                <TextBox Text="{Binding Path=YCount, Mode=TwoWay}"/>
             </StackPanel>
-            <Slider x:Name="YCount" Margin="20,0,20,0" Value="10" SmallChange="0" Minimum="5" Maximum="20" TickPlacement="BottomRight" LargeChange="0" IsSnapToTickEnabled="True"/>
+            <Slider x:Name="YCount" Margin="20,0,20,0"
+                    SmallChange="0" Minimum="{Binding Path=MinCellCount}" Maximum="{Binding Path=MaxCellCount}" TickPlacement="BottomRight" LargeChange="0" 
+                    IsSnapToTickEnabled="True" Value="{Binding Path=YCount, Mode=TwoWay}"/>
             <Button Content="Начать" Margin="20,20,20,0" FontSize="20"/>
         </StackPanel>
-        <CheckBox Content="Темная тема" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center"/>
+        <CheckBox Content="Темная тема" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center"
+                  IsChecked="{Binding Path=DarkMode, Mode=OneWayToSource}"/>
     </Grid>
 </Window>
