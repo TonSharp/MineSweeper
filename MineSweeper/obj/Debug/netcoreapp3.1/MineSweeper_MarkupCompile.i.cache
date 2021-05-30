@@ -1,5 +1,5 @@
 ﻿MineSweeper
-
+1.0.0.0
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\Projects\CS\MineSweeper\MineSweeper\App.xaml
 31950837139
 
-6-976036287
+8-301296371
 1921654412462
 MainWindow.xaml;Resources\DarkTheme.xaml;Resources\LightTheme.xaml;
 
-False
+True
 

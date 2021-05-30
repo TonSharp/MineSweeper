@@ -3,11 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace MineSweeper.ViewModels
 {
     public class MainMenuVM : BaseVM
     {
+        public MainMenuVM()
+        {
+            ChangeThemeCommand = new Command(
+                o =>
+                {
+                    ResourceDictionary dictionary = new ResourceDictionary();
+                    darkMode = !darkMode;
+
+                    if (darkMode)
+                        dictionary.Source = new Uri("../Resources/DarkTheme.xaml", UriKind.Relative);
+                    else
+                        dictionary.Source = new Uri("../Resources/LightTheme.xaml", UriKind.Relative);
+
+                    Application.Current.Resources.MergedDictionaries[0] = dictionary;
+                });
+            minesCount = MinMinesCount;
+            xCount = MinCellCount;
+            yCount = MinCellCount;
+        }
+
         public int MaxMinesCount { get; } = 50;
         public int MinMinesCount { get; } = 10;
 
@@ -61,16 +83,8 @@ namespace MineSweeper.ViewModels
             }
         }
 
-        private bool darkMode;
-        public bool DarkMode
-        {
-            get => darkMode;
-            set
-            {
-                darkMode = value;
+        private bool darkMode = false;
 
-
-            }
-        }
+        public Command ChangeThemeCommand { get; private set; }
     }
 }

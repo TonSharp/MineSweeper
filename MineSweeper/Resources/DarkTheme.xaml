@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MineSweeper">
+    <Style TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#FF222222"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="#FF222222"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FF222222"/>
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#4B0082"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#FF222222"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

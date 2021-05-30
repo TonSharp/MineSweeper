@@ -17,5 +17,7 @@ D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\MineSweeper.pdb
 D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\MineSweeper.genruntimeconfig.cache
 D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\MainWindow.baml
-D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\Resources\WhiteTheme.baml
 D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\App.baml
+D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\Resources\DarkTheme.baml
+D:\Projects\CS\MineSweeper\MineSweeper\obj\Debug\netcoreapp3.1\Resources\LightTheme.baml
