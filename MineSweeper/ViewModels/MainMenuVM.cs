@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MineSweeper.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,26 +11,6 @@ namespace MineSweeper.ViewModels
 {
     public class MainMenuVM : BaseVM
     {
-        public MainMenuVM()
-        {
-            ChangeThemeCommand = new Command(
-                o =>
-                {
-                    ResourceDictionary dictionary = new ResourceDictionary();
-                    darkMode = !darkMode;
-
-                    if (darkMode)
-                        dictionary.Source = new Uri("../Resources/DarkTheme.xaml", UriKind.Relative);
-                    else
-                        dictionary.Source = new Uri("../Resources/LightTheme.xaml", UriKind.Relative);
-
-                    Application.Current.Resources.MergedDictionaries[0] = dictionary;
-                });
-            minesCount = MinMinesCount;
-            xCount = MinCellCount;
-            yCount = MinCellCount;
-        }
-
         public int MaxMinesCount { get; } = 50;
         public int MinMinesCount { get; } = 10;
 
@@ -37,7 +18,8 @@ namespace MineSweeper.ViewModels
         public int MaxCellCount { get; } = 20;
 
         private int minesCount;
-        public int MinesCount { 
+        public int MinesCount
+        {
             get => minesCount;
             set
             {
@@ -85,6 +67,44 @@ namespace MineSweeper.ViewModels
 
         private bool darkMode = false;
 
+        private MainMenuModel menuModel { get; set; }
+
         public Command ChangeThemeCommand { get; private set; }
+        public Command StartNewSessionCommand { get; private set; }
+
+        public MainMenuVM()
+        {
+            menuModel = new MainMenuModel();
+
+            ChangeThemeCommand = new Command(o => SwitchTheme());
+            StartNewSessionCommand = new Command(o  => menuModel.StartNewSession(new SessionEventArgs(minesCount, xCount, yCount)));
+
+            minesCount = MinMinesCount;
+            xCount = MinCellCount;
+            yCount = MinCellCount;
+        }
+
+        private void SwitchTheme()
+        {
+            darkMode = !darkMode;
+
+            ResourceDictionary dictionary = LoadOppositeThemeResource();
+            Application.Current.Resources.MergedDictionaries[0] = dictionary;
+        }
+        private ResourceDictionary LoadOppositeThemeResource()
+        {
+            ResourceDictionary dictionary = new ResourceDictionary();
+            dictionary.Source = GetOppositeFileTheme();
+
+            return dictionary;
+        }
+        private Uri GetOppositeFileTheme()
+        {
+            if (darkMode)
+                return new Uri("../Resources/DarkTheme.xaml", UriKind.Relative);
+            else
+                return new Uri("../Resources/LightTheme.xaml", UriKind.Relative);
+
+        }
     }
 }

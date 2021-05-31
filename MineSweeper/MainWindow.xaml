@@ -42,7 +42,8 @@
             <Slider x:Name="YCount" Margin="20,0,20,0"
                     SmallChange="0" Minimum="{Binding Path=MinCellCount}" Maximum="{Binding Path=MaxCellCount}" TickPlacement="BottomRight" LargeChange="0" 
                     IsSnapToTickEnabled="True" Value="{Binding Path=YCount, Mode=TwoWay}"/>
-            <Button Content="Начать" Margin="20,20,20,0" FontSize="20" Padding="1,5,1,5"/>
+            <Button Content="Начать" Margin="20,20,20,0" FontSize="20" Padding="1,5,1,5"
+                    Command="{Binding StartNewSessionCommand}"/>
         </StackPanel>
         <Button Content="Сменить тему" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" Padding="10,5,10,5"
                 Command="{Binding ChangeThemeCommand}"/>
