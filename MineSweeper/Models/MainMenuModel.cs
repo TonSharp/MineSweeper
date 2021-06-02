@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MineSweeper.DataStructures;
+using MineSweeper.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,8 @@ namespace MineSweeper.Models
             SetUpWindowSize(ref window, args);
             SetUpWindowField(ref window, args);
 
+            (window.DataContext as SessionVM).Model.MinesCount = args.MinesCount;
+
             return window;
         }
         private void SetUpWindowSize(ref SessionWindow window, SessionEventArgs args)
@@ -36,21 +40,28 @@ namespace MineSweeper.Models
         }
         private void SetUpWindowField(ref SessionWindow window, SessionEventArgs args)
         {
-            window.Field.Columns = args.FieldWidth;
-            window.Field.Rows = args.FieldHeight;
+            window.FieldGrid.Columns = args.FieldWidth;
+            window.FieldGrid.Rows = args.FieldHeight;
 
             CreateFieldButtons(ref window);
         }
         private void CreateFieldButtons(ref SessionWindow window)
         {
-            for(int y = 0; y < window.Field.Rows; y++)
+            SessionVM vm = window.DataContext as SessionVM;
+            vm.InitializeField(window.FieldGrid.Rows, window.FieldGrid.Columns);
+
+            for (int y = 0; y < window.FieldGrid.Rows; y++)
             {
-                for(int x = 0; x < window.Field.Columns; x++)
-                {
+                for(int x = 0; x < window.FieldGrid.Columns; x++)
+                { 
                     Button button = new Button();
                     button.Content = "";
+                    button.Command = vm.clickCommand;
+                    button.CommandParameter = button;
 
-                    window.Field.Children.Add(button);
+                    vm.Model.Field.Cells[y, x] = new Cell(button, false);
+
+                    window.FieldGrid.Children.Add(button);
                     Grid.SetColumn(button, x);
                     Grid.SetRow(button, y);
                 }
