@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MineSweeper.DataStructures
 {
@@ -24,9 +25,23 @@ namespace MineSweeper.DataStructures
 
         public void Lock()
         {
-            for(int y = 0; y < Height; y++)
-                for(int x = 0; x < Width; x++)
-                    Cells[y, x].Button.IsEnabled = false;
+            Button current;
+
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    current = Cells[y, x].Button;
+
+                    if(Cells[y, x].IsMine)
+                    {
+                        current.Foreground = Brushes.Red;
+                        current.Content = "M";
+                    }
+
+                    current.IsEnabled = false;
+                }
+            }
         }
 
         public int GetActiveCellsCount()
