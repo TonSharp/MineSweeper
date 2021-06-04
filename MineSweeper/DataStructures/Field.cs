@@ -22,6 +22,29 @@ namespace MineSweeper.DataStructures
             Cells = new Cell[Height, Width];
         }
 
+        public void Lock()
+        {
+            for(int y = 0; y < Height; y++)
+                for(int x = 0; x < Width; x++)
+                    Cells[y, x].Button.IsEnabled = false;
+        }
+
+        public int GetActiveCellsCount()
+        {
+            int sum = 0;
+
+            for(int y = 0; y < Height; y++)
+            {
+                for(int x = 0; x < Width; x++)
+                {
+                    if (Cells[y, x].Button.IsEnabled)
+                        sum++;
+                }
+            }
+
+            return sum;
+        }
+
         public int GetMinesCountAround(Button button)
         {
             int sum = 0;

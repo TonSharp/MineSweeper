@@ -44,9 +44,17 @@ namespace MineSweeper.ViewModels
                 {
                     StatusText = "Потрачено";
                     StatusBrush = Brushes.Red;
+                    Model.LockField();
                 }
 
                 Model.OpenCell(o, new List<Button>());
+
+                if(Model.IsGameFinished())
+                {
+                    StatusText = "Победа";
+                    StatusBrush = Brushes.Green;
+                    Model.LockField();
+                }
             } );
         }
         public void InitializeField(int Height, int Width)

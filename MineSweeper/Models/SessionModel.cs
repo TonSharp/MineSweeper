@@ -20,6 +20,11 @@ namespace MineSweeper.Models
             Field = new Field(Height, Width);
         }
 
+        public bool IsGameFinished()
+        {
+            return Field.GetActiveCellsCount() == MinesCount;
+        }
+
         public bool IsMine(object Sender)
         {
             if(Sender is Button button)
@@ -27,6 +32,12 @@ namespace MineSweeper.Models
 
             return false;
         }
+
+        public void LockField()
+        {
+            Field.Lock();
+        }
+
         public void OpenCell(object Sender, List<Button> Checked)
         {
             if (!(Sender is Button))
