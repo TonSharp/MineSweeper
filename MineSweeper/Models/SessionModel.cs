@@ -20,43 +20,59 @@ namespace MineSweeper.Models
             Field = new Field(Height, Width);
         }
 
+        public bool IsMine(object Sender)
+        {
+            if(Sender is Button button)
+                return Field.GetCellByButton(button).IsMine;
+
+            return false;
+        }
         public void OpenCell(object Sender, List<Button> Checked)
         {
-            if(firstClick)
+            if (!(Sender is Button))
+                return;
+
+            Button sender = Sender as Button;
+
+            if (firstClick)
             {
-                InitializeMinesField();
+                InitializeMinesField(sender);
                 firstClick = false;
             }
 
-            if(Sender is Button sender)
+            sender.IsEnabled = false;
+
+            Cell clickedCell = Field.GetCellByButton(sender);
+            if (Field.GetCellByButton(sender).IsMine)
             {
-                sender.IsEnabled = false;
+                HandleMineClick(clickedCell);
+                return;
+            }
 
-                if (Field.GetCellByButton(sender).IsMine)
+            int minesCountAround = Field.GetMinesCountAround(sender);
+            if(minesCountAround == 0)
+            {
+                List<Cell> neighbours = Field.GetNeighbourCells(sender);
+
+                foreach (var btn in neighbours)
                 {
-                    sender.Content = "M";
-                    return;
-                }
-
-                int minesCountAround = Field.GetMinesCountAround(sender);
-                if(minesCountAround == 0)
-                {
-                    List<Cell> neighbours = Field.GetNeighbourCells(sender);
-
-                    foreach (var btn in neighbours)
+                    if(!Checked.Contains(btn.Button))
                     {
-                        if(!Checked.Contains(btn.Button))
-                        {
-                            Checked.Add(btn.Button);
-                            OpenCell(btn.Button, Checked);
-                        }
+                        Checked.Add(btn.Button);
+                        OpenCell(btn.Button, Checked);
                     }
                 }
-                else
-                    sender.Content = minesCountAround;
             }
+            else
+                sender.Content = minesCountAround;
         }
-        private void InitializeMinesField()
+        private void HandleMineClick(Cell cell)
+        {
+            cell.Button.Content = "M";
+            cell.Button.Style = null;
+            cell.Button.Foreground = Brushes.Red;
+        }
+        private void InitializeMinesField(Button sender)
         {
             int usedMines = 0;
             Random random = new Random();
@@ -65,7 +81,7 @@ namespace MineSweeper.Models
             {
                 for (int x = 0; x < Field.Width; x++)
                 {
-                    if (usedMines < MinesCount && random.Next(2) > 0)
+                    if (usedMines < MinesCount && random.Next(2) > 0 && Field.Cells[y, x].Button != sender)
                     {
                         Field.Cells[y, x].IsMine = true;
                         usedMines++;

@@ -15,6 +15,9 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <TextBlock x:Name="GameStatus" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="34"
+                   Foreground="{Binding Path=StatusBrush, Mode=OneWay}"
+                   Text="{Binding Path=StatusText, Mode=OneWay}"/>
         <UniformGrid Grid.Row="1" x:Name="FieldGrid">
 
         </UniformGrid>
