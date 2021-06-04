@@ -88,17 +88,20 @@ namespace MineSweeper.Models
             int usedMines = 0;
             Random random = new Random();
 
-            for (int y = 0; y < Field.Height; y++)
+            while(usedMines < MinesCount)
             {
-                for (int x = 0; x < Field.Width; x++)
+                for (int y = 0; y < Field.Height; y++)
                 {
-                    if (usedMines < MinesCount && random.Next(2) > 0 && Field.Cells[y, x].Button != sender)
+                    for (int x = 0; x < Field.Width; x++)
                     {
-                        Field.Cells[y, x].IsMine = true;
-                        usedMines++;
+                        if (usedMines < MinesCount && random.Next(101) > 90 && Field.Cells[y, x].Button != sender)
+                        {
+                            Field.Cells[y, x].IsMine = true;
+                            usedMines++;
+                        }
                     }
                 }
-            }
+            }    
         }
     }
 }
