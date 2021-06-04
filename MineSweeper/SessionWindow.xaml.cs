@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace MineSweeper
 {
-    /// <summary>
-    /// Логика взаимодействия для Session.xaml
-    /// </summary>
     public partial class SessionWindow : Window
     {
         public SessionWindow()

@@ -4,14 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MineSweeper"
+        xmlns:vm="clr-namespace:MineSweeper.ViewModels"
         mc:Ignorable="d"
         Title="Session" Height="450" Width="450">
+    <Window.DataContext>
+        <vm:SessionVM/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="1" x:Name="Field">
+        <TextBlock x:Name="GameStatus" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="34"
+                   Foreground="{Binding Path=StatusBrush, Mode=OneWay}"
+                   Text="{Binding Path=StatusText, Mode=OneWay}"/>
+        <UniformGrid Grid.Row="1" x:Name="FieldGrid">
 
         </UniformGrid>
     </Grid>
